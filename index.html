@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Zetrom Roblox Builder Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+  /* Reset & basics */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff5722, #ff9800);
+    color: #fff;
+    overflow-x: hidden;
+    transition: background 0.5s ease;
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Container */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  /* Header */
+  header {
+    padding: 2rem 0;
+    text-align: center;
+    position: relative;
+  }
+  header h1 {
+    font-weight: 600;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+  header p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Navigation */
+  nav {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-weight: 600;
+  }
+  nav a {
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  /* Hero section with parallax background */
+  .hero {
+    height: 400px;
+    background-image: url('https://cdn.pixabay.com/photo/2017/08/06/16/12/gamer-2594156_1280.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+  }
+  .hero h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    background: rgba(0,0,0,0.4);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  /* About section with fade-in animation */
+  section.about {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 3rem 1rem;
+    margin: 3rem 0;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+  }
+  section.about h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  section.about p {
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+
+  /* Counters */
+  .counters {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+  }
+  .counter-box {
+    background: rgba(0,0,0,0.3);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    flex: 1 1 150px;
+    box-shadow: 0 0 15px rgba(255, 152, 0, 0.5);
+    min-width: 150px;
+  }
+  .counter-box h4 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .counter-box p {
+    font-weight: 400;
+    font-size: 1.1rem;
+  }
+
+  /* Carousel */
+  .carousel-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  }
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  .carousel-item {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+  }
+  .carousel-item img {
+    max-height: 400px;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 15px;
+    cursor: pointer; /* hinzugefügt, damit es klickbar aussieht */
+  }
+  .carousel-buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 1rem;
+  }
+  .carousel-buttons button {
+    background: rgba(255, 152, 0, 0.8);
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 152, 0, 0.7);
+    transition: background 0.3s ease;
+    user-select: none;
+  }
+  .carousel-buttons button:hover {
+    background: #ff6f00;
+  }
+
+  /* Gallery */
+  .gallery {
+    margin: 3rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 1.5rem;
+    justify-items: center;
+  }
+  .gallery img {
+    max-width: 90%;
+    max-height: 200px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    object-fit: contain;
+  }
+  .gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 152, 0, 0.8);
+  }
+
+  /* Footer */
+  footer {
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    margin-top: 4rem;
+    font-weight: 300;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    border-top: 1px solid rgba(255, 152, 0, 0.5);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer .credits {
+    color: #fff;
+  }
+  footer .buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  footer .buttons a {
+    background: rgba(255, 152, 0, 0.8);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    color: #fff;
+    user-select: none;
+  }
+  footer .buttons a:hover {
+    background: #ff6f00;
+  }
+
+  /* Animations */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation-fill-mode: forwards;
+    animation-name: fadeInUp;
+    animation-duration: 1s;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Radar color selector */
+  .radar-panel {
+    position: fixed;
+    top: 10%;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    padding: 1rem;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 220px;
+    color: #fff;
+    font-weight: 600;
+    user-select: none;
+    z-index: 1000;
+    font-family: 'Poppins', sans-serif;
+  }
+  .radar-panel h4 {
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+  }
+  .radar-panel label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    gap: 0.5rem;
+  }
+  .radar-panel input[type="color"] {
+    cursor: pointer;
+    border: none;
+    width: 40px;
+    height: 30px;
+    padding: 0;
+    background: none;
+  }
+
+  /* Lightbox overlay */
+  #lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1500;
+  }
+  #lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 15px;
+    box-shadow: 0 0 40px rgba(255, 152, 0, 0.9);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Zetrom Roblox Builder</h1>
+  <p>Portfolio Made By forzaitaliaa</p>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#counters">Stats</a>
+    <a href="#carousel">Featured Builds</a>
+    <a href="#gallery">Gallery</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Build. Create. Inspire.</h2>
+</section>
+
+<section id="about" class="about fade-in" style="animation-delay: 0.2s;">
+  <h3>About Zetrom</h3>
+  <p>
+    Zetrom is a passionate Roblox builder focused on crafting unique and engaging game environments. With a keen eye for detail and dedication to quality, Zetrom brings virtual worlds to life using advanced building techniques and creativity. From sprawling cities to intricate landscapes, each project reflects a commitment to excellence and player immersion.
+  </p>
+</section>
+
+<section id="counters" class="counters fade-in" style="animation-delay: 0.4s;">
+  <div class="counter-box">
+    <h4 id="projects-count">0</h4>
+    <p>Projects Completed</p>
+  </div>
+  <div class="counter-box">
+    <h4 id="hours-count">0</h4>
+    <p>Started building</p>
+  </div>
+  <div class="counter-box">
+    <h4 id="clients-count">0</h4>
+    <p>Happy Clients</p>
+  </div>
+</section>
+
+<section id="carousel" class="carousel-container fade-in" style="animation-delay: 0.6s;">
+  <div class="carousel">
+    <div class="carousel-item">
+      <img src="https://media.discordapp.net/attachments/1076635923007156266/1404142910840115385/Schiff_.jpg?ex=689a1d7d&is=6898cbfd&hm=415ee093941b65986284f2ffb245cd7b86b55bd10d2d25b32904cdcf8e65e2d3&=&format=webp" alt="Build 1" />
+    </div>
+    <div class="carousel-item">
+      <img src="https://media.discordapp.net/attachments/1076635923007156266/1404140367472889936/Screenshot_2025-08-10_164759.jpg?ex=689a1b1f&is=6898c99f&hm=d0ba6a8d7d06ba80371bca22c8e6f4808a63094f9556693f5fb9b04cc80ad749&=&format=webp" alt="Build 2" />
+    </div>
+    <div class="carousel-item">
+      <img src="https://media.discordapp.net/attachments/1076635923007156266/1404154623006343279/zetrom-villa.png?ex=689a2866&is=6898d6e6&hm=3e591e3c28ee2b015f574766198aa5aaf036bac8e0be239d94a054e358d7ed25&=&format=webp&quality=lossless" alt="Build 3" />
+    </div>
+  </div>
+  <div class="carousel-buttons">
+    <button id="prev-btn">&#10094;</button>
+    <button id="next-btn">&#10095;</button>
+  </div>
+</section>
+
+<section id="gallery" class="gallery fade-in" style="animation-delay: 0.8s;">
+  <img src="https://media.discordapp.net/attachments/1076635923007156266/1404155459786637424/Screenshot_2025-08-10_145149.jpg?ex=689a292d&is=6898d7ad&hm=97440210a590989c29185ae34da4d46c07ffc869883fb3330cda9b42e5fdedb6&=&format=webp" alt="Gallery Image 1" />
+  <img src="https://media.discordapp.net/attachments/1076635923007156266/1404155809142673528/image.png?ex=689a2980&is=6898d800&hm=7acdd57e0941155fd0e8f851d6a3d6ea6d96c2bf4d8fb3f68aa398b39be74e8a&=&format=webp&quality=lossless" alt="Gallery Image 2" />
+  <img src="https://media.discordapp.net/attachments/1076635923007156266/1404154623555534898/zetrom-shibuya-station.png?ex=689a2866&is=6898d6e6&hm=1cc8a4822bee3c0de906234fe207d22db0c48a4e70b062dfe96447d5e1298947&=&format=webp&quality=lossless" alt="Gallery Image 3" />
+  <img src="https://media.discordapp.net/attachments/1076635923007156266/1404154622217682945/zetrom-map.png?ex=689a2865&is=6898d6e5&hm=348b84a3cf5d822fb6ae45a431901f9d2e342bacc912a75c5a017314f544a32d&=&format=webp&quality=lossless" alt="Gallery Image 4" />
+</section>
+
+<!-- Radar color selector panel -->
+<div class="radar-panel">
+  <h4>Change Theme color</h4>
+  <label for="color1">Primary Color</label>
+  <input type="color" id="color1" value="#ff9800" />
+  <label for="color2">Secondary Color</label>
+  <input type="color" id="color2" value="#ff5722" />
+
+</div>
+
+<!-- Lightbox overlay -->
+<div id="lightbox-overlay">
+  <img src="" alt="Lightbox Image" />
+</div>
+
+<footer>
+  <div class="credits">© 2024 Zetrom. All rights reserved.</div>
+  <div class="buttons">
+    <a href="https://www.roblox.com/users/4104424830/profile" target="_blank" rel="noopener noreferrer">Zetrom`s Roblox profile</a>
+    <a href="https://www.youtube.com/channel/UCWE_RkwdPyeZ4GKRP9-DrKg" target="_blank" rel="noopener noreferrer">Zetrom´s youtube</a>
+  </div>
+</footer>
+
+<script>
+  // Counters animation
+  const projectsCount = document.getElementById('projects-count');
+  const hoursCount = document.getElementById('hours-count');
+  const clientsCount = document.getElementById('clients-count');
+
+  function animateCounter(element, target, duration) {
+    let start = 0;
+    const stepTime = Math.abs(Math.floor(duration / target));
+    const timer = setInterval(() => {
+      start += 1;
+      element.textContent = start;
+      if (start >= target) clearInterval(timer);
+    }, stepTime);
+  }
+  animateCounter(projectsCount, 120, 3000);
+  animateCounter(hoursCount, 2022, 3000);
+  animateCounter(clientsCount, 75, 3000);
+
+  // Carousel functionality
+  const carousel = document.querySelector('.carousel');
+  const carouselItems = document.querySelectorAll('.carousel-item');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  let currentIndex = 0;
+
+  function updateCarousel() {
+    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+    updateCarousel();
+  });
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % carouselItems.length;
+    updateCarousel();
+  });
+
+  // Lightbox functionality for gallery & carousel images
+  const lightboxOverlay = document.getElementById('lightbox-overlay');
+  const lightboxImage = lightboxOverlay.querySelector('img');
+  const galleryImages = document.querySelectorAll('.gallery img');
+  const carouselImages = document.querySelectorAll('.carousel-item img');
+
+  function openLightbox(src, alt) {
+    lightboxImage.src = src;
+    lightboxImage.alt = alt;
+    lightboxOverlay.style.display = 'flex';
+  }
+
+  galleryImages.forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  });
+  carouselImages.forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  });
+
+  lightboxOverlay.addEventListener('click', () => {
+    lightboxOverlay.style.display = 'none';
+    lightboxImage.src = '';
+    lightboxImage.alt = '';
+  });
+
+  // Radar color picker (example functionality)
+  const color1 = document.getElementById('color1');
+  const color2 = document.getElementById('color2');
+  const color3 = document.getElementById('color3');
+
+  // Just example: change background gradient based on colors
+  function updateBackground() {
+    document.body.style.background = `linear-gradient(135deg, ${color1.value}, ${color2.value})`;
+  }
+  color1.addEventListener('input', updateBackground);
+  color2.addEventListener('input', updateBackground);
+
+  // Initial background update
+  updateBackground();
+
+</script>
+</body>
+</html>
